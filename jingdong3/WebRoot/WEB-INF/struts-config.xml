@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans >
+    <form-bean name="loginForm" type="com.szu.entity.Users" />
+
+  </form-beans>
+
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action
+      attribute="loginForm"
+      input="/form/login.jsp"
+      name="loginForm"
+      path="/login"
+      scope="request"
+      type="com.szu.struts.action.LoginAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="success" path="/goods.do?opr=select" />
+      <forward
+        name="error"
+        path="/form/login.jsp"
+        redirect="true" />
+    </action>
+    <action
+      parameter="opr"
+      path="/goods"
+      type="com.szu.struts.action.GoodsAction">
+      <set-property property="cancellable" value="true" />
+      <forward name="success" path="/show.jsp" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources parameter="com.szu.struts.ApplicationResources" />
+</struts-config>
+
